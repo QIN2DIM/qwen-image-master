@@ -12,6 +12,17 @@ import httpx
 from loguru import logger
 from pydantic import BaseModel, Field
 
+# Generate with different aspect ratios
+aspect_ratios = {
+    "1:1": "1328x1328",
+    "16:9": "1664x928",
+    "9:16": "928x1664",
+    "4:3": "1472x1140",
+    "3:4": "1140x1472",
+    "3:2": "1584x1056",
+    "2:3": "1056x1584",
+}
+
 
 class ToolCallingPayload(BaseModel):
     prompt: str
@@ -23,6 +34,11 @@ class ToolCallingPayload(BaseModel):
     model: str | None = Field(default="Qwen/Qwen-Image")
 
 
+class ToolCallingError(BaseModel):
+    code: int | None = 0
+    message: str | None = ""
+
+
 class ToolCallingResponse(BaseModel):
     request_id: str | None = ""
     task_id: str | None = ""
@@ -30,10 +46,12 @@ class ToolCallingResponse(BaseModel):
     time_taken: float | None = 0.0
     input: dict | None = Field(default_factory=dict)
     output_images: List[str] | None = Field(default_factory=list)
+    errors: ToolCallingError | None = Field(default_factory=dict)
 
     @property
-    def image_url(self) -> str:
-        return self.output_images[0]
+    def image_url(self) -> str | None:
+        if self.output_images:
+            return self.output_images[0]
 
 
 class ToolCallingClient:

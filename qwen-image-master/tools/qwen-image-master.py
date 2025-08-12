@@ -28,6 +28,7 @@ class QwenImageMasterTool(Tool):
             json_message = response.model_dump(mode="json")
             logger.success(f"{json.dumps(json_message, indent=2, ensure_ascii=False)}")
             yield self.create_json_message(json_message)
-            yield self.create_image_message(response.image_url)
+            if image_url := response.image_url:
+                yield self.create_image_message(image_url)
         else:
             logger.error("Image Generation Failed.")

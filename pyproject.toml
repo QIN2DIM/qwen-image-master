@@ -8,7 +8,6 @@ dependencies = [
     "dify-plugin>=0.4.3",
     "httpx[http2]>=0.28.1",
     "loguru>=0.7.3",
-    "openai>=1.99.9",
 ]
 
 [dependency-groups]
