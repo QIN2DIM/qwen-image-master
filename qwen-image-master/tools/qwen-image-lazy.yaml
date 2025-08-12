@@ -1,0 +1,58 @@
+identity:
+  name: "qwen-image-lazy"
+  author: "qin2dim"
+  label:
+    en_US: "qwen-image-lazy"
+    zh_Hans: "qwen-image-lazy"
+    pt_BR: "qwen-image-lazy"
+description:
+  human:
+    en_US: "Qwen Image Plugin (Lazy Mode) - Simplified text-to-image generation with automatic parameter optimization"
+    zh_Hans: "Qwen Image 插件（懒人模式） - 简化的文生图，自动参数优化"
+    pt_BR: "Qwen Image Plugin (Lazy Mode) - Simplified text-to-image generation with automatic parameter optimization"
+  llm: "Qwen Image Plugin Lazy Mode - Simplified interface for text-to-image generation with automatic prompt enhancement and parameter optimization"
+parameters:
+  - name: query
+    type: string
+    required: true
+    label:
+      en_US: Query string
+      zh_Hans: 查询语句
+      pt_BR: Query string
+    human_description:
+      en_US: "Natural language prompt describing what image you want to generate. The parameter generator will enhance and optimize this query for better results."
+      zh_Hans: "自然语言描述，说明您想要生成什么样的图像。参数生成器将对此查询进行增强和优化以获得更好的结果。"
+      pt_BR: "Natural language prompt describing what image you want to generate. The parameter generator will enhance and optimize this query for better results."
+    llm_description: "Natural language description of the desired image. This will be enhanced by the parameter generator model for optimal image generation."
+    form: llm
+  - name: imagine_model
+    type: model-selector
+    required: true
+    label:
+        en_US: Prompt Optimizer
+        zh_Hans: 提示优化器
+        pt_BR: Prompt Optimizer
+    human_description:
+      en_US: "AI model that translates and enhances your natural language query into optimized image generation parameters and prompts."
+      zh_Hans: "AI模型，用于将您的自然语言查询翻译和增强为优化的图像生成参数和提示词。"
+      pt_BR: "AI model that translates and enhances your natural language query into optimized image generation parameters and prompts."
+    llm_description: "AI model that translates and enhances your natural language query into optimized image generation parameters and prompts."
+    form: form
+  - name: model_id
+    type: string
+    required: true
+    default: "Qwen/Qwen-Image"
+    label:
+      en_US: "Imagine Model ID"
+      zh_Hans: "生成模型 ID"
+      pt_BR: "Imagine Model ID"
+    human_description:
+      en_US: "Model ID for text-to-image generation. Must be an AIGC model ID from ModelScope."
+      zh_Hans: "文生图模型ID。必须是ModelScope上的AIGC模型ID。"
+      pt_BR: "Model ID for text-to-image generation. Must be an AIGC model ID from ModelScope."
+    llm_description: "ModelScope AIGC model ID for text-to-image generation."
+    form: form
+
+extra:
+  python:
+    source: tools/qwen-image-lazy.py

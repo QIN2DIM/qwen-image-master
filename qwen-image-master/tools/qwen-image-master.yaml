@@ -1,0 +1,124 @@
+identity:
+  name: "qwen-image-master"
+  author: "qin2dim"
+  label:
+    en_US: "qwen-image-master"
+    zh_Hans: "qwen-image-master"
+    pt_BR: "qwen-image-master"
+description:
+  human:
+    en_US: "Qwen Image Plugin for Dify"
+    zh_Hans: "Qwen Image Plugin for Dify"
+    pt_BR: "Qwen Image Plugin for Dify"
+  llm: "Qwen Image Plugin for Dify"
+
+# https://www.modelscope.cn/docs/model-service/API-Inference/intro
+# https://www.modelscope.cn/models?filter=inference_type&page=1&tabKey=task&tasks=hotTask:text-to-image-synthesis&type=tasks
+parameters:
+  - name: model
+    type: string
+    required: true
+    default: "Qwen/Qwen-Image"
+    label:
+      en_US: "Imagine Model ID"
+      zh_Hans: "生成模型 ID"
+      pt_BR: "Imagine Model ID"
+    human_description:
+      en_US: "Model ID for text-to-image generation. Must be an AIGC model ID from ModelScope."
+      zh_Hans: "文生图模型ID。必须是ModelScope上的AIGC模型ID。"
+      pt_BR: "Model ID for text-to-image generation. Must be an AIGC model ID from ModelScope."
+    llm_description: "ModelScope AIGC model ID for text-to-image generation."
+    form: form
+  - name: prompt
+    type: string
+    required: true
+    default: "A mysterious girl walking down the corridor."
+    label:
+      en_US: "Prompt"
+      zh_Hans: "提示词"
+      pt_BR: "Prompt"
+    human_description:
+      zh_Hans: "正向提示词，大部分模型建议使用英文提示词效果较好。最大长度：2000字符。"
+      en_US: "Positive prompt for image generation. Most models recommend using English prompts for better results. Maximum length: 2000 characters."
+      pt_BR: "Positive prompt for image generation. Most models recommend using English prompts for better results. Maximum length: 2000 characters."
+    llm_description: "Positive prompt for image generation. Most models recommend using English prompts for better results. Maximum length: 2000 characters."
+    form: llm
+  - name: negative_prompt
+    type: string
+    required: false
+    label:
+      en_US: "Negative Prompt"
+      zh_Hans: "负向提示词"
+      pt_BR: "Negative Prompt"
+    human_description:
+      zh_Hans: "负向提示词，用于指定不希望在生成图像中出现的内容。最大长度：2000字符。"
+      en_US: "Negative prompt to specify what you don't want in the generated image. Maximum length: 2000 characters."
+      pt_BR: "Negative prompt to specify what you don't want in the generated image. Maximum length: 2000 characters."
+    llm_description: "Negative prompt to specify undesired elements in the generated image. Maximum length: 2000 characters."
+    form: llm
+  - name: size
+    type: string
+    required: false
+    default: "2048x2048"
+    label:
+      en_US: "Size"
+      zh_Hans: "图片分辨率"
+      pt_BR: "Size"
+    human_description:
+      zh_Hans: "生成图像分辨率大小。格式：宽x高（如1024x1024）。SD系列支持范围：64x64到2048x2048；FLUX系列支持范围：64x64到1024x1024。"
+      en_US: "Image resolution. Format: widthxheight (e.g., 1024x1024). SD series supports: 64x64 to 2048x2048; FLUX series supports: 64x64 to 1024x1024."
+      pt_BR: "Image resolution. Format: widthxheight (e.g., 1024x1024). SD series supports: 64x64 to 2048x2048; FLUX series supports: 64x64 to 1024x1024."
+    llm_description: "Image resolution in widthxheight format (e.g., 1024x1024). SD models support 64x64 to 2048x2048; FLUX models support 64x64 to 1024x1024."
+    form: llm
+  - name: seed
+    type: number
+    required: false
+    default: 114514
+    min: 0
+    max: 2147483647
+    label:
+      en_US: "Seed"
+      zh_Hans: "随机种子"
+      pt_BR: "Seed"
+    human_description:
+      zh_Hans: "随机种子，用于控制图像生成的随机性。相同的种子将生成相同的图像。取值范围：0到2147483647（2^31-1）。"
+      en_US: "Random seed for controlling image generation randomness. Same seed produces same image. Range: 0 to 2147483647 (2^31-1)."
+      pt_BR: "Random seed for controlling image generation randomness. Same seed produces same image. Range: 0 to 2147483647 (2^31-1)."
+    llm_description: "Random seed for reproducible generation. Valid range: 0 to 2147483647 (2^31-1)."
+    form: form
+  - name: steps
+    type: number
+    required: false
+    default: 30
+    min: 1
+    max: 100
+    label:
+      en_US: "Steps"
+      zh_Hans: "采样步数"
+      pt_BR: "Steps"
+    human_description:
+      zh_Hans: "采样步数，决定图像生成的迭代次数。步数越多，图像质量通常越高，但生成时间越长。取值范围：1到100。"
+      en_US: "Sampling steps for image generation iterations. More steps typically mean higher quality but longer generation time. Range: 1 to 100."
+      pt_BR: "Sampling steps for image generation iterations. More steps typically mean higher quality but longer generation time. Range: 1 to 100."
+    llm_description: "Number of sampling steps for image generation. Higher values increase quality but also generation time. Range: 1 to 100."
+    form: llm
+  - name: guidance
+    type: number
+    required: false
+    default: 5.5
+    min: 1.5
+    max: 20
+    label:
+      en_US: "Guidance"
+      zh_Hans: "提示词引导系数"
+      pt_BR: "Guidance"
+    human_description:
+      zh_Hans: "提示词引导系数，控制生成图像与提示词的匹配程度。值越高，图像越贴近提示词描述。取值范围：1.5到20。"
+      en_US: "Prompt guidance scale controlling how closely the image matches the prompt. Higher values produce images more faithful to the prompt. Range: 1.5 to 20."
+      pt_BR: "Prompt guidance scale controlling how closely the image matches the prompt. Higher values produce images more faithful to the prompt. Range: 1.5 to 20."
+    llm_description: "Guidance scale for prompt adherence. Higher values make the image follow the prompt more closely. Range: 1.5 to 20."
+    form: llm
+
+extra:
+  python:
+    source: tools/qwen-image-master.py

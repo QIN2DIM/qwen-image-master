@@ -1,0 +1,38 @@
+credentials_for_provider:
+  MODELSCOPE_API_KEY:
+    label:
+      en_US: MODELSCOPE_API_KEY
+      ja_JP: MODELSCOPE_API_KEY
+      zh_Hans: MODELSCOPE_API_KEY
+    required: true
+    type: secret-input
+    url: https://www.modelscope.cn/models/Qwen/Qwen-Image
+  MODELSCOPE_BASE_URL:
+    label:
+      en_US: MODELSCOPE_BASE_URL
+      ja_JP: MODELSCOPE_BASE_URL
+      zh_Hans: MODELSCOPE_BASE_URL
+    required: false
+    type: text-input
+    default: "https://api-inference.modelscope.cn/"
+    url: https://www.modelscope.cn/models/Qwen/Qwen-Image
+
+
+identity:
+  author: "qin2dim"
+  name: "qwen-image-master"
+  label:
+    en_US: "qwen-image-master"
+    zh_Hans: "qwen-image-master"
+    pt_BR: "qwen-image-master"
+  description:
+    en_US: "Qwen Image Plugin for Dify"
+    zh_Hans: "Qwen Image Plugin for Dify"
+    pt_BR: "Qwen Image Plugin for Dify"
+  icon: "icon.jpg"
+
+tools:
+  - tools/qwen-image-master.yaml
+extra:
+  python:
+    source: provider/qwen-image-master.py
