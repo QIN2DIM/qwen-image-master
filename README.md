@@ -1,4 +1,4 @@
-# qwen-image-master
+# LLM Imagine Master
 
 ![](docs/QwenImageMaster.png)
 
