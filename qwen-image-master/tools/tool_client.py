@@ -50,15 +50,14 @@ class ToolCallingResponse(BaseModel):
 
     @property
     def image_url(self) -> str | None:
-        if self.output_images:
-            return self.output_images[0]
+        return self.output_images[0] if self.output_images else None
 
 
 class ToolCallingClient:
     def __init__(self, api_key: str, base_url: str = "https://api-inference.modelscope.cn/"):
         self._api_key = api_key
         self._base_url = base_url
-        self._client = httpx.Client(base_url=base_url)
+        self._client = httpx.Client(base_url=base_url, timeout=300)
 
         self._loop_count = 60
         self._sleep_interval = 3
@@ -93,3 +92,5 @@ class ToolCallingClient:
                 return ToolCallingResponse(**data)
 
             time.sleep(self._sleep_interval)
+
+        return None
